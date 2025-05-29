@@ -205,3 +205,45 @@ REST_FRAMEWORK = {
     ],
 }
 ########################################
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,  # Important to not kill other useful logs
+    'formatters': {
+        'simple': {
+            'format': '[{levelname}] {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'INFO',  # Show only info+ unless overridden below
+    },
+    'loggers': {
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'WARNING',  # Suppress SQL logs (change to DEBUG to enable)
+            'propagate': False,
+        },
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        # Optional: If you use `ic()` from `icecream`
+        'icecream': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        # Your project-specific loggers, example:
+        'core': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
