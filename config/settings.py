@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'Super_Secr3t_9999')
 
 # Enable/Disable DEBUG Mode
-DEBUG = str2bool(os.environ.get('DEBUG'))
+DEBUG = os.getenv("DEBUG", "False") == "True"
 #print(' DEBUG -> ' + str(DEBUG) ) 
 
 ALLOWED_HOSTS = ['*']
@@ -175,8 +175,9 @@ STATICFILES_DIRS = (
 )
 
 if not DEBUG:
-    # Enable gzip for WhiteNoise
     STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+else:
+    STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
