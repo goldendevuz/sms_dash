@@ -1,4 +1,5 @@
 import json
+from decouple import config
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from icecream import ic
@@ -40,7 +41,7 @@ def sample_page(request):
   return render(request, 'pages/sample-page.html', context)
 
 def send_sms_message(api_token, html_message, phone):
-    url = "https://piglet-factual-mentally.ngrok-free.app/api/sms/"
+    url =   config('SMS_URL')  # Replace with your actual SMS endpoint
 
     payload = json.dumps({
     "number": phone.replace("+998", ""),
