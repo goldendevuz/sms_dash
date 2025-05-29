@@ -19,7 +19,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Collect static files (only works in DEBUG=True without WhiteNoise errors)
-RUN python manage.py collectstatic --noinput
+RUN python manage.py collectstatic --no-input
 
 # Apply migrations
 RUN python manage.py makemigrations
