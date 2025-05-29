@@ -1,4 +1,3 @@
-version: '3.8'
 services:
   appseed-app:
     container_name: appseed_app
@@ -10,7 +9,7 @@ services:
   nginx:
     container_name: nginx
     restart: always
-    image: "nginx:latest"
+    image: "nginx:stable-alpine3.21-slim"
     ports:
       - "5085:5085"
     volumes:
