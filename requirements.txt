@@ -29,3 +29,4 @@ django-dbbackup==4.2.1
 
 drf-material==0.3.3
 icecream==2.1.4
+uvicorn==0.34.2

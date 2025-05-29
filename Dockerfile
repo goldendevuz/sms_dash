@@ -17,4 +17,6 @@ RUN python manage.py makemigrations
 RUN python manage.py migrate
 
 # gunicorn
-CMD ["gunicorn", "--config", "gunicorn-cfg.py", "config.wsgi"]
+# CMD ["gunicorn", "--config", "gunicorn-cfg.py", "config.wsgi"]
+CMD ["uvicorn", "config.asgi:application", "--host", "0.0.0.0", "--port", "5005", "--log-level", "debug", "--reload"]
+
