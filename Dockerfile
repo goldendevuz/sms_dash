@@ -16,8 +16,8 @@ COPY . .
 ENV DEBUG=True
 RUN python manage.py collectstatic --noinput
 
-ENV DEBUG=False
-RUN python manage.py collectstatic --noinput
+# ENV DEBUG=False
+# RUN python manage.py collectstatic --noinput
 
 RUN python manage.py migrate
 
