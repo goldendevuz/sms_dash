@@ -1,22 +1,26 @@
 FROM python:3.13-slim
 
-# set environment variables
+# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
+WORKDIR /app
+
 COPY requirements.txt .
 
-# install python dependencies
+# Install dependencies
 RUN pip install --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Copy project files
 COPY . .
 
-# Running Migrations
+# Collect static files
+RUN python manage.py collectstatic --noinput
+
+# Apply migrations
 RUN python manage.py makemigrations
 RUN python manage.py migrate
 
-# gunicorn
-# CMD ["gunicorn", "--config", "gunicorn-cfg.py", "config.wsgi"]
+# Run Uvicorn ASGI app
 CMD ["uvicorn", "config.asgi:application", "--host", "0.0.0.0", "--port", "5005", "--log-level", "debug", "--reload"]
-
